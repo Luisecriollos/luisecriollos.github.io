@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luis Criollo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.4/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.min.js"
+        integrity="sha512-OxXHRCrHZMOqbrhaUX+wMD4pRxO+Ym5CKOf0qsPkBTeBOXBjAKirtaTH87wKgEikZBPOMQPOEqE/3fpWa1wiuQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <div class="h-screen w-screen flex flex-col overflow-hidden">
+        <div class="header flex flex-col w-2/4 self-center">
+            <img src="Logo-U.png" class='logo'>
+            <div class='title text-gray-600 text-center'>
+                DESARROLLO DE UN COMPONENTE PARA LA ELABORACIÓN DE REPORTES WEB
+                DEL LADO DEL CLIENTE UTILIZANDO LOS FORMATOS HTML, PDF Y EXCEL
+            </div>
+        </div>
+        <div class="flex flex-col h-full items-center justify-center max-h-[27rem]">
+            <div class="w-10/12">
+                <button class="button" onclick="clearContent()">Limpiar</button>
+                /
+                <button class="button" onclick="loadTable()">Insertar tabla</button>
+            </div>
+            <div class="bg-white w-10/12 h-2/3 outline-none p-4 border shadow-md rounded-md border-gray-200 overflow-auto"
+                id="content-editable" contenteditable>
+
+            </div>
+        </div>
+        <nav class="flex navbar bg-[#6b6b6b]">
+            <div class="dropdown">
+                <div class="dropdown-content" id="dropdown">
+                    <a onclick="exportToPdf()">Exportar como PDF</a>
+                    <a onclick="exportText()">Exportar como HTML</a>
+                    <a onclick="exportTableToExcel()">Exportar como EXCEL</a>
+                    <a onclick="exportText('.doc')">Exportar como DOC</a>
+                    <a onclick="exportText('.txt')">Exportar como TXT</a>
+                </div>
+                <button class="dropbtn" onclick="openMenu()">Exportar
+                    <i class="fa fa-caret-down"></i>
+                </button>
+            </div>
+            <label for="file-upload" class="custom-file-upload">
+                Importar
+            </label>
+            <input hidden onchange="loadFile()" id="file-upload" type="file"
+                accept=".pdf,.txt,.html, application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+        </nav>
+    </div>
+</body>
+<script>
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function openMenu() {
+        document.getElementById("dropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (e) {
+        if (!e.target.matches('.dropbtn')) {
+            var dropdown = document.getElementById("dropdown");
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        }
+    }
+</script>
+
+</html>
